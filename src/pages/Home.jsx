@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom'; // นำเข้า Link
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-
 
 const images = [
     {
@@ -89,13 +89,13 @@ export default function Example() {
                 <h2 id="highlights" className="text-3xl font-bold text-center text-white mb-12">Highlights</h2>
 
                 {/* Swiper Slider */}
-                <Swiper spaceBetween={10} slidesPerView={1} loop={true}>
+                <Swiper spaceBetween={10} slidesPerView={1} loop={true} autoplay={{ delay: 2500, disableOnInteraction: false }} modules={[Autoplay]}>
                     {images.map((image) => (
                         <SwiperSlide key={image.id}>
                             <div className="w-full overflow-hidden rounded-lg bg-gray-200">
                                 <img
                                     src={image.src}
-                                    alt={image.alt}
+                                    alt={`Slide ${image.id}`}
                                     className="w-full object-cover object-center"
                                     style={{ height: '500px' }} // กำหนดความสูงของรูปภาพที่นี่
                                 />
@@ -105,12 +105,10 @@ export default function Example() {
                 </Swiper>
 
                 {/* Grid of products */}
-                <h2 id="#" className="text-2xl font-bold  text-white mb-8 mt-12">อุทยานแห่งชาติจังหวัดเชียงใหม่</h2>
-                <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 mt-12">
-
+                <h2 className="text-2xl font-bold text-white mb-8 mt-12">อุทยานแห่งชาติจังหวัดเชียงใหม่</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 mt-12">
                     {products.map((product) => (
                         <Link key={product.id} to={`/detail/${product.id}`} className="group">
-                            {/* ปรับ aspect ratio ให้รูปภาพเป็นสี่เหลี่ยมจัตุรัส */}
                             <div className="w-full h-56 overflow-hidden rounded-lg bg-gray-200">
                                 <img
                                     alt={product.name}
@@ -123,8 +121,6 @@ export default function Example() {
                     ))}
                 </div>
             </div>
-
         </div>
-
     );
 }
